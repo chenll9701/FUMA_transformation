@@ -1,0 +1,26 @@
+##annovar
+#example/ex1.avinput is the input file; humandb/ is the output directory;
+#ex1 is the output file 
+annotate_variation.pl -downdb -buildver hg19 -webfrom annovar snp138 humandb
+cd /Data/chenll/UKBB/nap
+annotate_variation.pl -filter -out male_anno -build hg19 -dbtype snp138 'nap_male(processed).tsv' ~/annovar/humandb/humandb/
+annotate_variation.pl -filter -out anno -build hg19 -dbtype snp138 'PD(processed).tsv' ~/annovar/humandb/
+
+
+cd /Data/chenll/UKBB/insomnia
+annotate_variation.pl -filter -out male_anno -build hg19 -dbtype snp138 'inso_male(processed).tsv' ~/annovar/humandb/humandb/ &
+annotate_variation.pl -filter -out female_anno -build hg19 -dbtype snp138 'inso_female(processed).tsv' ~/annovar/humandb/humandb/ &
+
+cd /Data/chenll/UKBB/chronotype
+annotate_variation.pl -filter -out male_anno -build hg19 -dbtype snp138 'chron_male(processed).tsv' ~/annovar/humandb/humandb/ &
+annotate_variation.pl -filter -out female_anno -build hg19 -dbtype snp138 'chron_female(processed).tsv' ~/annovar/humandb/humandb/ &
+
+cd /Data/chenll/UKBB/sleep_duration
+annotate_variation.pl -filter -out male_anno -build hg19 -dbtype snp138 'dur_male(processed).tsv' ~/annovar/humandb/humandb/ &
+annotate_variation.pl -filter -out female_anno -build hg19 -dbtype snp138 'dur_female(processed).tsv' ~/annovar/humandb/humandb/ &
+
+cd /Data/chenll/UKBB/DM/diabetes
+annotate_variation.pl -filter -out male_anno -build hg19 -dbtype snp138 'dm_male(processed).tsv' ~/annovar/humandb/humandb/ &
+annotate_variation.pl -filter -out female_anno -build hg19 -dbtype snp138 'dm_female(processed).tsv' ~/annovar/humandb/humandb/ &
+
+

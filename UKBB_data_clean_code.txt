@@ -1,0 +1,202 @@
+##python for UKBB data cleaning 
+import pandas as pd
+import numpy as np
+import os
+
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\nap')
+
+
+###insomnia_female
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\insomnia')
+inso_female=pd.read_csv('inso_female.tsv', sep='\t')
+variant=inso_female.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, inso_female,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('inso_female(processed).tsv', sep='\t', index=False)
+
+
+###inosmnia_male
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\insomnia')
+inso_male=pd.read_csv('inso_male.tsv', sep='\t')
+variant=inso_male.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, inso_male,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('inso_male(processed).tsv', sep='\t', index=False)
+
+###chronotype_male
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\chronotype')
+chron_male=pd.read_csv('chron_male.tsv', sep='\t')
+variant=chron_male.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, chron_male,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('chron_male(processed).tsv', sep='\t', index=False)
+
+###chronotype_female
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\chronotype')
+chron_female=pd.read_csv('chron_female.tsv', sep='\t')
+variant=chron_female.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, chron_female,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('chron_female(processed).tsv', sep='\t', index=False)
+
+###sleep_duration_female
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\sleep_duration')
+dur_female=pd.read_csv('dur_female.tsv', sep='\t')
+variant=dur_female.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, dur_female,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('dur_female(processed).tsv', sep='\t', index=False)
+
+###sleep_duration_male
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\sleep_duration')
+dur_male=pd.read_csv('dur_male.tsv', sep='\t')
+variant=dur_male.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, dur_male,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('dur_male(processed).tsv', sep='\t', index=False)
+
+
+###read the annotated data 
+##nap_male
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\nap')
+male_anno=pd.read_csv('male_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+male_anno=male_anno.drop(columns=['Base','start_BP'])
+male_anno.to_csv('nap_male_anno.tsv', sep='\t', index=False)
+
+##nap_female
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\nap')
+female_anno=pd.read_csv('female_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+female_anno=female_anno.drop(columns=['Base','start_BP'])
+female_anno.to_csv('nap_female_anno.tsv', sep='\t', index=False)
+
+##insomnia_male
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\insomnia')
+male_anno=pd.read_csv('male_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+male_anno=male_anno.drop(columns=['Base','start_BP'])
+male_anno.to_csv('inso_male_anno.tsv', sep='\t', index=False)
+
+##insomnia_female
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\insomnia')
+female_anno=pd.read_csv('female_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+female_anno=female_anno.drop(columns=['Base','start_BP'])
+female_anno.to_csv('inso_female_anno.tsv', sep='\t', index=False)
+
+##chronotype_male
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\chronotype')
+male_anno=pd.read_csv('male_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+male_anno=male_anno.drop(columns=['Base','start_BP'])
+male_anno.to_csv('chron_male_anno.tsv', sep='\t', index=False)
+
+
+##chronotype_female
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\chronotype')
+female_anno=pd.read_csv('female_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+female_anno=female_anno.drop(columns=['Base','start_BP'])
+female_anno.to_csv('chron_female_anno.tsv', sep='\t', index=False)
+
+##sleep_duration_male
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\sleep_duration')
+male_anno=pd.read_csv('male_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+male_anno=male_anno.drop(columns=['Base','start_BP'])
+male_anno.to_csv('dur_male_anno.tsv', sep='\t', index=False)
+
+
+##sleep_duration_female
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\sleep_snp\\sleep_duration')
+female_anno=pd.read_csv('female_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+female_anno=female_anno.drop(columns=['Base','start_BP'])
+female_anno.to_csv('dur_female_anno.tsv', sep='\t', index=False)
+
+##Diabetes
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\DM\\UKBB')
+dm_female=pd.read_csv('dm_female.tsv', sep='\t')
+variant=dm_female.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, dm_female,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('dm_female(processed).tsv', sep='\t', index=False)
+
+dm_male=pd.read_csv('dm_male.tsv', sep='\t')
+variant=dm_male.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','Reference_Allele','Effect_Allele','Variant'])
+df_all=pd.merge(df, dm_male,left_on='Variant',right_on='variant')
+df_finished=df_all[['CHR','BP','BP','Reference_Allele','Effect_Allele','beta','se','pval']]
+df_finished.to_csv('dm_male(processed).tsv', sep='\t', index=False)
+
+
+##Diabetes
+os.chdir('C:\\Users\\11780\\Documents\\R”Ô—‘¡∑œ∞\\MR\\DM\\UKBB')
+female_anno=pd.read_csv('female_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+female_anno=female_anno.drop(columns=['Base','start_BP'])
+female_anno.to_csv('dm_female_anno.tsv', sep='\t', index=False)
+
+male_anno=pd.read_csv('male_anno.hg19_snp138_dropped',sep='\t',
+	header=None,names=['Base','SNP','CHR','start_BP','BP','A2','A1','Beta','Se','P'])
+male_anno=male_anno.drop(columns=['Base','start_BP'])
+male_anno.to_csv('dm_male_anno.tsv', sep='\t', index=False)
+
+
+##annotate with UKBB rsid
+import pandas as pd
+data=pd.read_csv('AD.tsv', sep='\t')
+data=data[['variant','beta','se','pval']]
+rsid=pd.read_csv('/data/chenll/UKBB/ukbb-variant-rsid.tsv',sep='\t')
+variant=data.variant
+ls=[]
+for item in variant:
+	split=item.split(sep=':')
+	ls.append([split[0],split[1],split[2],split[3],item])
+df = pd.DataFrame(ls, columns=['CHR','BP','A2','A1','variant'])
+df=pd.merge(df,data,left_on='variant',right_on='variant')
+df=pd.merge(df, rsid, left_on='variant',right_on='variant')
+df_finished=df[['rsid','CHR','BP','A1','A2','beta','se','pval']]
+df_finished.to_csv('fuma_AD.tsv', sep='\t', index=False)
+
+
